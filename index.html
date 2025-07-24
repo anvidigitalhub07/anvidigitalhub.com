@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnVi DigitalHub - Your Digital Marketing Partner</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+            /* Custom cursor: Multi-color, round, transparent, rotating */
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><defs><radialGradient id="multicolorGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%"><stop offset="0%" style="stop-color:rgba(255,0,0,0.7);stop-opacity:1" /><stop offset="33%" style="stop-color:rgba(0,255,0,0.7);stop-opacity:1" /><stop offset="66%" style="stop-color:rgba(0,0,255,0.7);stop-opacity:1" /><stop offset="100%" style="stop-color:rgba(255,0,0,0.7);stop-opacity:1" /></radialGradient></defs><circle cx="12" cy="12" r="10" fill="url(#multicolorGradient)" /><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="3s" repeatCount="indefinite" /></svg>') 12 12, auto;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* Custom scroll-reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Slightly longer transition */
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Button hover effect */
+        .btn-primary {
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #333; /* Darker grey on hover */
+            transform: translateY(-3px); /* More pronounced lift */
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3); /* Stronger shadow */
+        }
+        /* Input focus effect */
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #fff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5); /* Stronger glow */
+        }
+        /* Simple fade-in for sections */
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Removed .header-logo styling as logo is removed */
+        .client-logo {
+            max-height: 100px; /* Max height for client logos */
+            width: auto;
+            margin: 0 auto; /* Center images */
+            filter: grayscale(100%) brightness(150%); /* Desaturate and lighten for monochrome look */
+            transition: filter 0.3s ease;
+        }
+        .client-logo:hover {
+            filter: grayscale(0%) brightness(100%); /* Color on hover */
+        }
+        /* Styling for clickable service cards */
+        .service-card-link {
+            display: block; /* Make the whole card clickable */
+            text-decoration: none; /* Remove underline from link */
+            color: inherit; /* Inherit text color */
+        }
+
+        /* Rich animated background for Hero Section */
+        #home {
+            position: relative;
+            overflow: hidden; /* Hide overflow from pseudo-element */
+        }
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%; /* Larger than container to ensure full coverage */
+            height: 120%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: translate(-50%, -50%) scale(0.8);
+            animation: backgroundPulse 8s infinite alternate ease-in-out;
+            z-index: 0; /* Behind content */
+            pointer-events: none; /* Ensure it doesn't interfere with clicks */
+        }
+
+        @keyframes backgroundPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.7;
+            }
+        }
+        /* Styling for service detail sections */
+        .service-detail-section {
+            padding-top: 80px; /* Adjust for fixed header */
+            padding-bottom: 80px;
+            background-color: #1a1a1a; /* Slightly lighter black for distinction */
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <!-- Header -->
+    <header class="py-6 border-b border-gray-800 fixed top-0 left-0 w-full z-50 bg-black">
+        <div class="container flex justify-between items-center">
+            <!-- Agency name as text -->
+            <a href="#home" class="text-3xl font-bold tracking-tight">AnVi DigitalHub</a>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#home" class="hover:text-gray-400 transition-colors duration-300">Home</a></li>
+                    <li><a href="#services" class="hover:text-gray-400 transition-colors duration-300">Services</a></li>
+                    <li><a href="#clients" class="hover:text-gray-400 transition-colors duration-300">Clients</a></li>
+                    <li><a href="#about" class="hover:text-gray-400 transition-colors duration-300">About Us</a></li>
+                    <li><a href="#contact" class="hover:text-gray-400 transition-colors duration-300">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center text-center pt-20"> <!-- Added pt-20 for header clearance -->
+        <!-- Background Overlay for Richness -->
+        <div class="absolute inset-0 bg-gradient-to-br from-black to-gray-900 opacity-90 z-0"></div>
+        <!-- Animated Grid/Pattern (conceptual) - Retained for subtle texture -->
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(#333 1px, transparent 1px), radial-gradient(#333 1px, transparent 1px); background-size: 40px 40px; background-position: 0 0, 20px 20px;"></div>
+
+        <div class="relative z-10 p-6 reveal">
+            <!-- Updated Tagline -->
+            <h1 class="text-6xl md:text-7xl font-extrabold leading-tight mb-6 animate-fade-in">
+                One Handshake Can Level Up Your Business.
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto animate-fade-in animation-delay-200">
+                Partner with AnVi DigitalHub to transform your digital presence and achieve measurable growth.
+            </p>
+            <button id="bookCallBtn" class="btn-primary bg-white text-black px-10 py-4 rounded-full text-lg font-semibold shadow-lg hover:bg-gray-200 transition-all duration-300 animate-fade-in animation-delay-400">
+                Book a Free Strategy Call
+            </button>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-gray-950 reveal">
+        <div class="container text-center">
+            <h2 class="text-5xl font-bold mb-8">About AnVi DigitalHub</h2>
+            <p class="text-lg text-gray-300 max-w-4xl mx-auto">
+                AnVi DigitalHub is a leading digital marketing agency based in Mainz Kastel, Germany, dedicated to empowering businesses to thrive in the digital landscape. We combine cutting-edge strategies with data-driven insights to deliver tailored solutions that drive growth, enhance brand visibility, and maximize ROI for our clients. Our passion lies in transforming digital challenges into opportunities for success.
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 reveal">
+        <div class="container">
+            <h2 class="text-5xl font-bold text-center mb-12">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 - Strategy Development -->
+                <a href="#strategy-development-details" class="service-card-link bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 hover:border-white transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-semibold mb-4">Strategy Development</h3>
+                    <p class="text-gray-300">Crafting comprehensive digital strategies aligned with your business goals to ensure a clear roadmap for success.</p>
+                </a>
+                <!-- Service Card 2 - Search Engine Optimization (SEO) -->
+                <a href="#seo-details" class="service-card-link bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 hover:border-white transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-semibold mb-4">Search Engine Optimization (SEO)</h3>
+                    <p class="text-gray-300">Improving your website's visibility on search engines to drive organic traffic and higher rankings.</p>
+                </a>
+                <!-- Service Card 3 - Pay-Per-Click (PPC) Advertising -->
+                <a href="#ppc-details" class="service-card-link bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 hover:border-white transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-semibold mb-4">Pay-Per-Click (PPC) Advertising</h3>
+                    <p class="text-gray-300">Creating and managing effective PPC campaigns across various platforms to generate immediate leads and sales.</p>
+                </a>
+                <!-- Service Card 4 - Content Marketing -->
+                <a href="#content-marketing-details" class="service-card-link bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 hover:border-white transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-semibold mb-4">Content Marketing</h3>
+                    <p class="text-gray-300">Developing valuable, relevant, and consistent content to attract and retain a clearly defined audience.</p>
+                </a>
+                <!-- Service Card 5 - Social Media Marketing -->
+                <a href="#social-media-marketing-details" class="service-card-link bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 hover:border-white transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-semibold mb-4">Social Media Marketing</h3>
+                    <p class="text-gray-300">Building strong brand presence and engaging with your audience on popular social media platforms.</p>
+                </a>
+                <!-- Service Card 6 - Email Marketing -->
+                <a href="#email-marketing-details" class="service-card-link bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 hover:border-white transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-semibold mb-4">Email Marketing</h3>
+                    <p class="text-gray-300">Designing and executing targeted email campaigns to nurture leads and convert prospects into loyal customers.</p>
+                </a>
+                <!-- Service Card 7 - Conversion Rate Optimization (CRO) -->
+                <a href="#cro-details" class="service-card-link bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 hover:border-white transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-semibold mb-4">Conversion Rate Optimization (CRO)</h3>
+                    <p class="text-gray-300">Optimizing your website and marketing funnels to increase the percentage of visitors who complete a desired action.</p>
+                </a>
+                <!-- Service Card 8 - Analytics and Reporting -->
+                <a href="#analytics-reporting-details" class="service-card-link bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 hover:border-white transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-semibold mb-4">Analytics and Reporting</h3>
+                    <p class="text-gray-300">Providing in-depth analysis and transparent reports to track performance and inform future strategies.</p>
+                </a>
+                <!-- Service Card 9 - Online Reputation Management (ORM) -->
+                <a href="#orm-details" class="service-card-link bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 hover:border-white transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-semibold mb-4">Online Reputation Management (ORM)</h3>
+                    <p class="text-gray-300">Protecting and enhancing your brand's online image through proactive strategies and crisis management.</p>
+                </a>
+                <!-- Service Card 10 - Mobile Marketing -->
+                <a href="#mobile-marketing-details" class="service-card-link bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 hover:border-white transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-semibold mb-4">Mobile Marketing</h3>
+                    <p class="text-gray-300">Reaching your audience effectively on mobile devices through optimized campaigns and user experiences.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Detail Sections (New - Content moved from separate files) -->
+
+    <!-- Strategy Development Details -->
+    <section id="strategy-development-details" class="service-detail-section bg-gray-950 reveal">
+        <div class="container">
+            <h1 class="text-5xl font-bold text-center mb-10">Strategy Development</h1>
+            <p class="text-lg text-gray-300 mb-8">
+                At AnVi DigitalHub, our Strategy Development services are the foundation of your digital success. We work closely with you to understand your business objectives, target audience, and competitive landscape. Our team then crafts a comprehensive, data-driven digital marketing strategy tailored to your unique needs, ensuring every effort is aligned with your goals.
+            </p>
+            <h2 class="text-3xl font-semibold mb-4">Key Aspects of Our Strategy Development:</h2>
+            <ul class="list-disc list-inside text-lg text-gray-300 mb-8 space-y-2">
+                <li><strong>Market Research & Analysis:</strong> In-depth research into your industry, competitors, and target audience to identify opportunities.</li>
+                <li><strong>Goal Setting:</strong> Defining clear, measurable, achievable, relevant, and time-bound (SMART) objectives for your digital campaigns.</li>
+                <li><strong>Audience Segmentation:</strong> Identifying and segmenting your ideal customer profiles to create highly targeted campaigns.</li>
+                <li><strong>Channel Selection:</strong> Recommending the most effective digital channels (SEO, PPC, Social Media, Email, etc.) for your specific goals.</li>
+                <li><strong>Content Planning:</strong> Developing a content calendar and strategy that resonates with your audience at every stage of their journey.</li>
+                <li><strong>Budget Allocation:</strong> Optimizing your marketing budget for maximum impact and ROI across all chosen channels.</li>
+                <li><strong>Performance Metrics & KPIs:</strong> Establishing key performance indicators to track progress and measure success.</li>
+            </ul>
+            <p class="text-lg text-gray-300 mb-10">
+                A well-defined strategy is the compass for your digital journey. Let AnVi DigitalHub chart your course to unparalleled online growth.
+            </p>
+        </div>
+    </section>
+
+    <!-- SEO Details -->
+    <section id="seo-details" class="service-detail-section bg-gray-900 reveal">
+        <div class="container">
+            <h1 class="text-5xl font-bold text-center mb-10">Search Engine Optimization (SEO)</h1>
+            <p class="text-lg text-gray-300 mb-8">
+                At AnVi DigitalHub, our Search Engine Optimization (SEO) services are designed to significantly improve your website's visibility on major search engines like Google, Bing, and Yahoo. We employ a holistic approach that covers all aspects of SEO, ensuring long-term organic growth and increased qualified traffic to your site.
+            </p>
+            <h2 class="text-3xl font-semibold mb-4">Our SEO Process Includes:</h2>
+            <ul class="list-disc list-inside text-lg text-gray-300 mb-8 space-y-2">
+                <li><strong>Keyword Research:</strong> Identifying the most relevant and high-traffic keywords for your business.</li>
+                <li><strong>On-Page SEO:</strong> Optimizing website content, meta tags, headers, and internal linking for search engines.</li>
+                <li><strong>Technical SEO:</strong> Ensuring your site's technical foundation is sound, including site speed, mobile-friendliness, and crawlability.</li>
+                <li><strong>Off-Page SEO (Link Building):</strong> Building high-quality backlinks from authoritative websites to boost your domain authority.</li>
+                <li><strong>Local SEO:</strong> Optimizing your online presence to attract more local customers.</li>
+                <li><strong>Content Optimization:</strong> Ensuring your content is not only keyword-rich but also valuable and engaging for your audience.</li>
+                <li><strong>Performance Monitoring & Reporting:</strong> Continuously tracking rankings, traffic, and conversions, providing transparent reports on progress and ROI.</li>
+            </ul>
+            <p class="text-lg text-gray-300 mb-10">
+                With our expert SEO strategies, your business will not only rank higher but also connect with the right audience, leading to sustainable growth and a stronger online presence.
+            </p>
+        </div>
+    </section>
+
+    <!-- PPC Details -->
+    <section id="ppc-details" class="service-detail-section bg-gray-950 reveal">
+        <div class="container">
+            <h1 class="text-5xl font-bold text-center mb-10">Pay-Per-Click (PPC) Advertising</h1>
+            <p class="text-lg text-gray-300 mb-8">
+                Our Pay-Per-Click (PPC) advertising services at AnVi DigitalHub are designed to deliver immediate and measurable results. We create highly targeted campaigns across platforms like Google Ads, Bing Ads, and social media channels to drive qualified traffic to your website, generate leads, and boost sales from day one.
+            </p>
+            <h2 class="text-3xl font-semibold mb-4">What Our PPC Services Offer:</h2>
+            <ul class="list-disc list-inside text-lg text-gray-300 mb-8 space-y-2">
+                <li><strong>Strategy & Setup:</strong> Developing a robust PPC strategy, including keyword selection, audience targeting, and campaign structure setup.</li>
+                <li><strong>Ad Creation:</strong> Crafting compelling ad copy and visuals that resonate with your target audience and drive clicks.</li>
+                <li><strong>Bid Management:</strong> Optimizing bids to maximize ROI and ensure your budget is spent effectively.</li>
+                <li><strong>Landing Page Optimization:</strong> Collaborating to ensure your landing pages are optimized for conversions.</li>
+                <li><strong>A/B Testing:</strong> Continuously testing different ad variations to identify what performs best.</li>
+                <li><strong>Performance Monitoring & Reporting:</strong> Providing detailed analytics on campaign performance, cost-per-click, conversions, and overall ROI.</li>
+                <li><strong>Remarketing:</strong> Re-engaging with visitors who have previously shown interest in your products or services.</li>
+            </ul>
+            <p class="text-lg text-gray-300 mb-10">
+                Leverage the power of paid advertising with AnVi DigitalHub to achieve rapid market penetration and significant business growth.
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Marketing Details -->
+    <section id="content-marketing-details" class="service-detail-section bg-gray-900 reveal">
+        <div class="container">
+            <h1 class="text-5xl font-bold text-center mb-10">Content Marketing</h1>
+            <p class="text-lg text-gray-300 mb-8">
+                Content is king, and at AnVi DigitalHub, we help you reign supreme. Our content marketing services focus on creating and distributing valuable, relevant, and consistent content to attract and retain a clearly defined audience — and ultimately, to drive profitable customer action. From blog posts to videos, we craft content that tells your story and engages your ideal customers.
+            </p>
+            <h2 class="text-3xl font-semibold mb-4">Our Content Marketing Services Include:</h2>
+            <ul class="list-disc list-inside text-lg text-gray-300 mb-8 space-y-2">
+                <li><strong>Content Strategy Development:</strong> Crafting a tailored content plan that aligns with your business objectives and target audience.</li>
+                <li><strong>Blog & Article Writing:</strong> Producing high-quality, SEO-friendly blog posts and articles that establish your authority.</li>
+                <li><strong>Website Copywriting:</strong> Developing persuasive and clear content for your website pages.</li>
+                <li><strong>Video Production:</strong> Creating engaging video content for various platforms (e.g., promotional, explainer, testimonial videos).</li>
+                <li><strong>Infographics & Visual Content:</strong> Designing visually appealing graphics to simplify complex information and enhance engagement.</li>
+                <li><strong>E-books & Whitepapers:</strong> Developing long-form content to position your brand as a thought leader.</li>
+                <li><strong>Content Distribution & Promotion:</strong> Ensuring your content reaches the right audience through various channels.</li>
+                <li><strong>Content Performance Analysis:</strong> Measuring the effectiveness of your content and refining strategies for better results.</li>
+            </ul>
+            <p class="text-lg text-gray-300 mb-10">
+                Let AnVi DigitalHub help you tell your brand's story effectively and build lasting connections with your audience through powerful content.
+            </p>
+        </div>
+    </section>
+
+    <!-- Social Media Marketing Details -->
+    <section id="social-media-marketing-details" class="service-detail-section bg-gray-950 reveal">
+        <div class="container">
+            <h1 class="text-5xl font-bold text-center mb-10">Social Media Marketing</h1>
+            <p class="text-lg text-gray-300 mb-8">
+                Engage your audience where they spend their time most – on social media. Our social media marketing services are designed to build your brand's presence, foster community, and drive traffic and conversions through strategic content and campaigns on platforms like Facebook, Instagram, LinkedIn, and more.
+            </p>
+            <h2 class="text-3xl font-semibold mb-4">Our Social Media Services Include:</h2>
+            <ul class="list-disc list-inside text-lg text-gray-300 mb-8 space-y-2">
+                <li><strong>Strategy Development:</strong> Crafting a social media strategy tailored to your brand and audience.</li>
+                <li><strong>Content Creation:</strong> Designing engaging posts, stories, and video content.</li>
+                <li><strong>Community Management:</strong> Actively engaging with your audience, responding to comments and messages.</li>
+                <li><strong>Paid Social Campaigns:</strong> Running targeted ad campaigns to reach specific demographics and achieve marketing objectives.</li>
+                <li><strong>Influencer Marketing:</strong> Connecting your brand with relevant influencers to expand reach and credibility.</li>
+                <li><strong>Performance Tracking:</strong> Monitoring key metrics and providing insights into social media ROI.</li>
+            </ul>
+            <p class="text-lg text-gray-300 mb-10">
+                Let AnVi DigitalHub amplify your voice and connect you with your customers on social media.
+            </p>
+        </div>
+    </section>
+
+    <!-- Email Marketing Details -->
+    <section id="email-marketing-details" class="service-detail-section bg-gray-900 reveal">
+        <div class="container">
+            <h1 class="text-5xl font-bold text-center mb-10">Email Marketing</h1>
+            <p class="text-lg text-gray-300 mb-8">
+                Email marketing remains one of the most effective ways to nurture leads and build lasting customer relationships. AnVi DigitalHub designs and executes highly personalized email campaigns that convert prospects into loyal customers and drive repeat business.
+            </p>
+            <h2 class="text-3xl font-semibold mb-4">Our Email Marketing Services Cover:</h2>
+            <ul class="list-disc list-inside text-lg text-gray-300 mb-8 space-y-2">
+                <li><strong>Audience Segmentation:</strong> Dividing your audience into targeted groups for personalized messaging.</li>
+                <li><strong>Campaign Strategy:</strong> Developing a clear strategy for newsletters, promotional emails, and automated sequences.</li>
+                <li><strong>Content & Design:</strong> Crafting compelling email copy and visually appealing designs.</li>
+                <li><strong>A/B Testing:</strong> Optimizing subject lines, content, and calls-to-action for better engagement.</li>
+                <li><strong>Automation & Nurturing:</strong> Setting up automated email flows for onboarding, abandoned carts, and lead nurturing.</li>
+                <li><strong>Performance Analysis:</strong> Tracking open rates, click-through rates, conversions, and subscriber growth.</li>
+            </ul>
+            <p class="text-lg text-gray-300 mb-10">
+                Build stronger connections and drive conversions directly to your customers' inboxes with AnVi DigitalHub.
+            </p>
+        </div>
+    </section>
+
+    <!-- Conversion Rate Optimization (CRO) Details -->
+    <section id="cro-details" class="service-detail-section bg-gray-950 reveal">
+        <div class="container">
+            <h1 class="text-5xl font-bold text-center mb-10">Conversion Rate Optimization (CRO)</h1>
+            <p class="text-lg text-gray-300 mb-8">
+                Are your website visitors taking the desired actions? Our Conversion Rate Optimization (CRO) services at AnVi DigitalHub focus on turning more of your existing website traffic into leads, sales, or other valuable conversions. We analyze user behavior, identify roadblocks, and implement strategic changes to maximize your website's performance.
+            </p>
+            <h2 class="text-3xl font-semibold mb-4">Our CRO Process Involves:</h2>
+            <ul class="list-disc list-inside text-lg text-gray-300 mb-8 space-y-2">
+                <li><strong>Website Analysis:</strong> In-depth review of your website's user experience, design, and content.</li>
+                <li><strong>User Behavior Tracking:</strong> Utilizing tools like heatmaps, session recordings, and analytics to understand how users interact with your site.</li>
+                <li><strong>A/B Testing & Multivariate Testing:</strong> Running experiments to compare different versions of pages or elements to see which performs best.</li>
+                <li><strong>Form Optimization:</strong> Streamlining forms to reduce friction and increase completion rates.</li>
+                <li><strong>Call-to-Action (CTA) Optimization:</strong> Designing compelling CTAs that encourage clicks and conversions.</li>
+                <li><strong>Landing Page Optimization:</strong> Enhancing dedicated landing pages for specific campaigns to improve conversion rates.</li>
+                <li><strong>Personalization:</strong> Tailoring content and offers based on user segments to increase relevance and engagement.</li>
+            </ul>
+            <p class="text-lg text-gray-300 mb-10">
+                Get more from your existing traffic. Let AnVi DigitalHub optimize your conversion funnels for superior results.
+            </p>
+        </div>
+    </section>
+
+    <!-- Analytics and Reporting Details -->
+    <section id="analytics-reporting-details" class="service-detail-section bg-gray-900 reveal">
+        <div class="container">
+            <h1 class="text-5xl font-bold text-center mb-10">Analytics and Reporting</h1>
+            <p class="text-lg text-gray-300 mb-8">
+                Data is power. At AnVi DigitalHub, we believe in transparent, data-driven decision-making. Our analytics and reporting services provide you with clear, actionable insights into your digital marketing performance, allowing you to understand what's working, where to improve, and how to maximize your return on investment.
+            </p>
+            <h2 class="text-3xl font-semibold mb-4">What We Provide:</h2>
+            <ul class="list-disc list-inside text-lg text-gray-300 mb-8 space-y-2">
+                <li><strong>Data Collection Setup:</strong> Configuring analytics tools (e.g., Google Analytics) to accurately track website and campaign data.</li>
+                <li><strong>Custom Dashboard Creation:</strong> Building personalized dashboards that highlight your most important KPIs.</li>
+                <li><strong>Performance Analysis:</strong> Regular analysis of traffic, conversions, user behavior, and campaign effectiveness.</li>
+                <li><strong>Competitor Benchmarking:</strong> Comparing your performance against industry benchmarks and competitors.</li>
+                <li><strong>Actionable Insights:</strong> Translating complex data into clear, easy-to-understand recommendations for improvement.</li>
+                <li><strong>Regular Reporting:</strong> Providing comprehensive, customized reports on a regular basis (weekly, monthly) to keep you informed.</li>
+                <li><strong>ROI Measurement:</strong> Helping you understand the true return on your digital marketing investment.</li>
+            </ul>
+            <p class="text-lg text-gray-300 mb-10">
+                Make smarter marketing decisions with clear, comprehensive data from AnVi DigitalHub.
+            </p>
+        </div>
+    </section>
+
+    <!-- Online Reputation Management (ORM) Details -->
+    <section id="orm-details" class="service-detail-section bg-gray-950 reveal">
+        <div class="container">
+            <h1 class="text-5xl font-bold text-center mb-10">Online Reputation Management (ORM)</h1>
+            <p class="text-lg text-gray-300 mb-8">
+                Your online reputation is paramount. Our Online Reputation Management (ORM) services at AnVi DigitalHub are dedicated to protecting, monitoring, and enhancing your brand's image across the digital landscape. We help you build trust, manage feedback, and mitigate potential negative impacts to ensure a positive perception of your business.
+            </p>
+            <h2 class="text-3xl font-semibold mb-4">Our ORM Services Include:</h2>
+            <ul class="list-disc list-inside text-lg text-gray-300 mb-8 space-y-2">
+                <li><strong>Reputation Monitoring:</strong> Continuously tracking mentions of your brand across social media, review sites, and news outlets.</li>
+                <li><strong>Review Management:</strong> Strategies for encouraging positive reviews and effectively responding to all feedback.</li>
+                <li><strong>Crisis Management:</strong> Developing and implementing plans to address and mitigate negative publicity quickly and effectively.</li>
+                <li><strong>Search Result Optimization:</strong> Working to ensure positive content ranks highly for your brand searches, pushing down negative results.</li>
+                <li><strong>Content Creation:</strong> Developing positive, authoritative content to strengthen your online presence.</li>
+                <li><strong>Social Listening:</strong> Understanding public sentiment and trends related to your brand and industry.</li>
+            </ul>
+            <p class="text-lg text-gray-300 mb-10">
+                Safeguard your brand's image and build unwavering trust with AnVi DigitalHub's ORM expertise.
+            </p>
+        </div>
+    </section>
+
+    <!-- Mobile Marketing Details -->
+    <section id="mobile-marketing-details" class="service-detail-section bg-gray-900 reveal">
+        <div class="container">
+            <h1 class="text-5xl font-bold text-center mb-10">Mobile Marketing</h1>
+            <p class="text-lg text-gray-300 mb-8">
+                With the majority of internet users accessing content on mobile devices, a robust mobile marketing strategy is essential. AnVi DigitalHub specializes in reaching your audience effectively on smartphones and tablets through optimized campaigns and seamless mobile user experiences, ensuring your brand is accessible wherever your customers are.
+            </p>
+            <h2 class="text-3xl font-semibold mb-4">Our Mobile Marketing Services Cover:</h2>
+            <ul class="list-disc list-inside text-lg text-gray-300 mb-8 space-y-2">
+                <li><strong>Mobile Website Optimization:</strong> Ensuring your website is fully responsive and provides an excellent experience on all mobile devices.</li>
+                <li><strong>Mobile SEO:</strong> Optimizing your site for mobile search rankings.</li>
+                <li><strong>SMS Marketing:</strong> Crafting targeted SMS campaigns for promotions, alerts, and customer engagement.</li>
+                <li><strong>Mobile App Marketing:</strong> Strategies for app store optimization (ASO) and user acquisition for mobile applications.</li>
+                <li><strong>Location-Based Marketing:</strong> Targeting customers based on their geographical proximity to your business.</li>
+                <li><strong>Mobile Advertising:</strong> Running ads specifically designed for mobile platforms and apps.</li>
+                <li><strong>QR Code Campaigns:</strong> Integrating QR codes into your marketing efforts for easy mobile access to content.</li>
+            </ul>
+            <p class="text-lg text-gray-300 mb-10">
+                Connect with your audience on the go. AnVi DigitalHub's mobile marketing strategies put your brand in the palm of their hand.
+            </p>
+        </div>
+    </section>
+
+    <!-- Client Success Section -->
+    <section id="clients" class="py-20 bg-gray-950 reveal">
+        <div class="container text-center">
+            <h2 class="text-5xl font-bold mb-12">Our Happy Clients</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8 items-center justify-center">
+                <!-- Client Logos/Products - Using a selection of provided images -->
+                <div class="p-4 bg-gray-900 rounded-lg shadow-md flex items-center justify-center border border-gray-800">
+                    <img src="Swadarshan-20250724T095615Z-1-001.zip/Swadarshan/website-product1.png" alt="Client Logo 1" class="client-logo">
+                </div>
+                <div class="p-4 bg-gray-900 rounded-lg shadow-md flex items-center justify-center border border-gray-800">
+                    <img src="Swadarshan-20250724T095615Z-1-001.zip/Swadarshan/website-product2.png" alt="Client Logo 2" class="client-logo">
+                </div>
+                <div class="p-4 bg-gray-900 rounded-lg shadow-md flex items-center justify-center border border-gray-800">
+                    <img src="Swadarshan-20250724T095615Z-1-001.zip/Swadarshan/website-product3.png" alt="Client Logo 3" class="client-logo">
+                </div>
+                <div class="p-4 bg-gray-900 rounded-lg shadow-md flex items-center justify-center border border-gray-800">
+                    <img src="fiqran-20250724T095614Z-1-001.zip/fiqran/fiqran1.jpg" alt="Client Logo 4" class="client-logo">
+                </div>
+                <div class="p-4 bg-gray-900 rounded-lg shadow-md flex items-center justify-center border border-gray-800">
+                    <img src="fiqran-20250724T095614Z-1-001.zip/fiqran/fiqran3.jpg" alt="Client Logo 5" class="client-logo">
+                </div>
+                <div class="p-4 bg-gray-900 rounded-lg shadow-md flex items-center justify-center border border-gray-800">
+                    <img src="fantraa-20250724T095612Z-1-001.zip/fantraa/f1.jpg" alt="Client Logo 6" class="client-logo">
+                </div>
+                <div class="p-4 bg-gray-900 rounded-lg shadow-md flex items-center justify-center border border-gray-800">
+                    <img src="fantraa-20250724T095612Z-1-001.zip/fantraa/f3.jpg" alt="Client Logo 7" class="client-logo">
+                </div>
+                <div class="p-4 bg-gray-900 rounded-lg shadow-md flex items-center justify-center border border-gray-800">
+                    <img src="Swadarshan-20250724T095615Z-1-001.zip/Swadarshan/website-product4.png" alt="Client Logo 8" class="client-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-950 reveal">
+        <div class="container">
+            <h2 class="text-5xl font-bold text-center mb-12">Get in Touch</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="flex flex-col justify-center items-start">
+                    <p class="text-lg text-gray-300 mb-4">
+                        Have questions or ready to discuss your digital marketing needs? Reach out to us!
+                    </p>
+                    <p class="text-lg mb-2">
+                        <strong>Email:</strong> <a href="mailto:info@anvidigitalhub.com" class="text-white hover:underline">info@anvidigitalhub.com</a>
+                    </p>
+                    <p class="text-lg mb-2">
+                        <strong>Address:</strong> Kurt Hebach Str. 5, 55252 Mainz Kastel, Germany
+                    </p>
+                    <p class="text-sm text-gray-500 mt-4">
+                        We operate in the German timezone. Our team will get back to you promptly.
+                    </p>
+                </div>
+
+                <!-- Booking Form -->
+                <div class="bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800">
+                    <h3 class="text-3xl font-semibold mb-6 text-center">Book a Free Strategy Call</h3>
+                    <form id="bookingForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-lg font-medium mb-2">Your Name</label>
+                            <input type="text" id="name" name="name" class="w-full p-3 rounded-md bg-gray-800 border border-gray-700 text-white placeholder-gray-400" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-lg font-medium mb-2">Your Email</label>
+                            <input type="email" id="email" name="email" class="w-full p-3 rounded-md bg-gray-800 border border-gray-700 text-white placeholder-gray-400" required>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-lg font-medium mb-2">Phone Number (Optional)</label>
+                            <input type="tel" id="phone" name="phone" class="w-full p-3 rounded-md bg-gray-800 border border-gray-700 text-white placeholder-gray-400">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-lg font-medium mb-2">Tell Us About Your Needs</label>
+                            <textarea id="message" name="message" rows="4" class="w-full p-3 rounded-md bg-gray-800 border border-gray-700 text-white placeholder-gray-400"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full bg-white text-black px-6 py-3 rounded-md text-lg font-semibold shadow-md hover:bg-gray-200 transition-all duration-300">
+                            Submit Booking Request
+                        </button>
+                    </form>
+                    <p id="formMessage" class="mt-4 text-center text-green-400 hidden"></p>
+                    <p class="text-sm text-gray-500 mt-6 text-center">
+                        *Note: This is a simulated booking form. In a live environment, this would integrate with a real-time calendar booking system with email notifications.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-black border-t border-gray-800 text-center text-gray-400">
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> AnVi DigitalHub. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Animations and Form Handling -->
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Check if the href is an internal anchor
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    // Get the target element, adjust scroll position for fixed header
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        const headerOffset = document.querySelector('header').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - headerOffset - 20; // Add extra padding
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                }
+                // For external pages, allow default behavior (though none exist now)
+            });
+        });
+
+        // Scroll-reveal animation for sections
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Stop observing once revealed
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
+
+        revealElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Hero section button scroll to contact form
+        document.getElementById('bookCallBtn').addEventListener('click', function() {
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Booking Form Submission (Simulated)
+        const bookingForm = document.getElementById('bookingForm');
+        const formMessage = document.getElementById('formMessage');
+
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent actual form submission
+
+            // In a real application, you would send this data to a backend server
+            // or a third-party booking API.
+            // Example: fetch('/api/book-call', { method: 'POST', body: new FormData(bookingForm) })
+
+            formMessage.textContent = 'Thank you for your booking request! We will contact you shortly via email to confirm the details.';
+            formMessage.classList.remove('hidden', 'text-red-400');
+            formMessage.classList.add('text-green-400');
+            bookingForm.reset(); // Clear the form
+
+            // Optionally hide message after a few seconds
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 7000);
+        });
+    </script>
+</body>
+</html>
